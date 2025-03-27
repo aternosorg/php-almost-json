@@ -1,0 +1,15 @@
+{
+  "null": null,
+  "uppercase": NULL,
+  "mixed": nUlL
+}
+
+/*
+-----EXPECTED-----
+{
+  "null": null,
+  "uppercase": null,
+  "mixed": null
+}
+-----EXPECTED-----
+*/

@@ -1,0 +1,29 @@
+[
+  "double",
+  'single',
+  unquoted,
+  ascii-escape-\x20code,
+  "unicode-escape-\u20ac-code",
+  "special-escape \b\f\n\r\t",
+  "backslash-escape \\",
+  "ignore unknown escape \a",
+  "quote escape \"",
+  'single-quote escape \'',
+]
+
+/*
+-----EXPECTED-----
+[
+  "double",
+  "single",
+  "unquoted",
+  "ascii-escape- code",
+  "unicode-escape-\u20ac-code",
+  "special-escape \b\f\n\r\t",
+  "backslash-escape \\",
+  "ignore unknown escape a",
+  "quote escape \"",
+  "single-quote escape '"
+]
+-----EXPECTED-----
+*/

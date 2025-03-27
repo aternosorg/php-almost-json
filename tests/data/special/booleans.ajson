@@ -1,0 +1,21 @@
+{
+  "true": true,
+  "false": false,
+  "uppercase-true": TRUE,
+  "uppercase-false": FALSE,
+  "mixedcase-true": TrUe,
+  "mixedcase-false": FaLse,
+}
+
+/*
+-----EXPECTED-----
+{
+  "true": true,
+  "false": false,
+  "uppercase-true": true,
+  "uppercase-false": false,
+  "mixedcase-true": true,
+  "mixedcase-false": false
+}
+-----EXPECTED-----
+*/

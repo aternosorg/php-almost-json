@@ -1,0 +1,13 @@
+{
+  "normal": {a: 1, b: 2, c: 3},
+  "trailing-comma": {a: 1, b: 2, c: 3,},
+}
+
+/*
+-----EXPECTED-----
+{
+  "normal": {"a": 1, "b": 2, "c": 3},
+  "trailing-comma": {"a": 1, "b": 2, "c": 3}
+}
+-----EXPECTED-----
+*/
