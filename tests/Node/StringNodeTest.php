@@ -87,6 +87,8 @@ class StringNodeTest extends NodeTestCase
     #[TestWith(["n", "\n"])]
     #[TestWith(["r", "\r"])]
     #[TestWith(["t", "\t"])]
+    #[TestWith(["v", "\v"])]
+    #[TestWith(["0", "\0"])]
     public function testSpecialEscape(string $char, string $expected): void
     {
         $input = new Input('"\\' . $char . '"');

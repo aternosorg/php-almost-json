@@ -20,7 +20,9 @@ class StringNode extends AlmostJsonNode
         "f" => "\x0c",
         "n" => "\n",
         "r" => "\r",
-        "t" => "\t"
+        "t" => "\t",
+        "v" => "\v",
+        "0" => "\0",
     ];
 
     protected string $value;
