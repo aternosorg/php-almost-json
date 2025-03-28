@@ -9,7 +9,7 @@ use Aternos\PhpAlmostJson\AlmostJsonParser;
 
 class StringNode extends AlmostJsonNode
 {
-    protected const QUOTE = ["'", '"'];
+    protected const QUOTE = ["'", '"', '`'];
     protected const UNQUOTED_DISALLOWED = ["{", "}", "[", "]", ":", ",", " ", "\t", "\n", "\r"];
     protected const ESCAPE = "\\";
     protected const ESCAPE_UNICODE = "u";

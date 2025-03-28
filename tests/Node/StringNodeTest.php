@@ -34,6 +34,15 @@ class StringNodeTest extends NodeTestCase
         $this->assertEquals("Hello, World!", $node->toNative());
     }
 
+    public function testBackTicks(): void
+    {
+        $input = new Input("`Hello, World!`");
+        $node = new StringNode();
+        $node->read($input, $this->parser);
+        $this->assertEquals("Hello, World!", $node->getValue());
+        $this->assertEquals("Hello, World!", $node->toNative());
+    }
+
     public function testEscapedQuotes(): void
     {
         $input = new Input('"Hello, \"World!"');

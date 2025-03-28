@@ -1,6 +1,7 @@
 [
   "double",
   'single',
+  `backticks`,
   unquoted,
   ascii-escape-\x20code,
   "unicode-escape-\u20ac-code",
@@ -20,6 +21,7 @@ string",
 [
   "double",
   "single",
+  "backticks",
   "unquoted",
   "ascii-escape- code",
   "unicode-escape-\u20ac-code",
