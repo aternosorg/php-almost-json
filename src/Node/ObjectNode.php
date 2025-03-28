@@ -34,7 +34,7 @@ class ObjectNode extends AlmostJsonNode
     public function read(Input $input, AlmostJsonParser $parser, int $depth = 0): void
     {
         $input->assert(static::OPEN);
-        $input->read();
+        $input->skip();
         $input->skipWhitespace();
 
         $depth++;
@@ -46,11 +46,11 @@ class ObjectNode extends AlmostJsonNode
             }
 
             $key = new StringNode();
-            $key->read($input, $parser);
+            $key->read($input, $parser, $depth + 1);
             $input->skipWhitespace();
 
             $input->assert(static::COLON);
-            $input->read();
+            $input->skip();
             $input->skipWhitespace();
 
             $value = $parser->parseNext($input, $depth);
@@ -59,11 +59,11 @@ class ObjectNode extends AlmostJsonNode
             if (!$input->check(static::COMMA)) {
                 break;
             }
-            $input->read();
+            $input->skip();
         }
         $input->skipWhitespace();
         $input->assert(static::CLOSE);
-        $input->read();
+        $input->skip();
         $this->children = $children;
     }
 

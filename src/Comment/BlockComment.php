@@ -20,14 +20,14 @@ class BlockComment implements AlmostJsonCommentInterface
     /**
      * @inheritDoc
      */
-    public static function read(Input $input): void
+    public static function skip(Input $input): void
     {
-        $input->read(2);
+        $input->skip(2);
         while ($input->valid() && !$input->check(static::END)) {
-            $input->read();
+            $input->skip();
         }
         if ($input->check(static::END)) {
-            $input->read(2);
+            $input->skip(2);
         }
     }
 }

@@ -31,6 +31,7 @@ class AlmostJsonParser
 
     protected bool $zeroPrefixOctal = false;
     protected int $maxDepth = 512;
+    protected bool $topLevelUnquotedStringAllowed = false;
 
     /**
      * @return bool
@@ -125,6 +126,24 @@ class AlmostJsonParser
     public function setMaxDepth(int $maxDepth): static
     {
         $this->maxDepth = $maxDepth;
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isTopLevelUnquotedStringAllowed(): bool
+    {
+        return $this->topLevelUnquotedStringAllowed;
+    }
+
+    /**
+     * @param bool $topLevelUnquotedStringAllowed
+     * @return $this
+     */
+    public function setTopLevelUnquotedStringAllowed(bool $topLevelUnquotedStringAllowed): static
+    {
+        $this->topLevelUnquotedStringAllowed = $topLevelUnquotedStringAllowed;
         return $this;
     }
 

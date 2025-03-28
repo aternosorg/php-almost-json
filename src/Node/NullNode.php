@@ -26,7 +26,7 @@ class NullNode extends AlmostJsonNode
     public function read(Input $input, AlmostJsonParser $parser, int $depth = 0): void
     {
         $input->assertInsensitive(static::NULL);
-        $input->read(4);
+        $input->skip(4);
     }
 
     /**

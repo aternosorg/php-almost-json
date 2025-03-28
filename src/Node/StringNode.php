@@ -43,6 +43,10 @@ class StringNode extends AlmostJsonNode
     public function read(Input $input, AlmostJsonParser $parser, int $depth = 0): void
     {
         if (!$input->check(...static::QUOTE)) {
+            if ($depth === 0 && !$parser->isTopLevelUnquotedStringAllowed()) {
+                throw new UnexpectedInputException("Expected quoted string at top level of JSON document, got " .
+                    $input->peek(16), $input->tell());
+            }
             $this->readUnquoted($input);
             return;
         }
@@ -54,7 +58,7 @@ class StringNode extends AlmostJsonNode
         }
 
         $input->assert($quote);
-        $input->read();
+        $input->skip();
         $this->value = $result;
     }
 
@@ -66,6 +70,7 @@ class StringNode extends AlmostJsonNode
      */
     protected function readUnquoted(Input $input): void
     {
+        $input->assertValid();
         if ($input->check(...static::UNQUOTED_DISALLOWED)) {
             throw new UnexpectedInputException("Expected unquoted string" .
                 ", got " . $input->peek(16), $input->tell());
@@ -87,15 +92,13 @@ class StringNode extends AlmostJsonNode
      */
     protected function readChar(Input $input): string
     {
-        if (!$input->valid()) {
-            throw new UnexpectedEndOfInputException("Expected character, got end of input", $input->tell());
-        }
+        $input->assertValid();
 
         if (!$input->check(static::ESCAPE)) {
             return $input->read();
         }
 
-        $input->read();
+        $input->skip();
         $input->assertValid();
         if (!$input->checkInsensitive(static::ESCAPE_UNICODE, static::ESCAPE_ASCII, ...array_keys(static::SPECIAL_ESCAPES))) {
             return $input->read();

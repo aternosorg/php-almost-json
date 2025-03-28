@@ -12,6 +12,8 @@ class NumberNode extends AlmostJsonNode
     protected const DECIMAL = ".";
     protected const EXPONENT = ["e", "E"];
     protected const SIGN = ["+", "-"];
+    protected const INFINITY = "Infinity";
+    protected const NAN = "NaN";
 
     protected int|float $value = 0;
 
@@ -20,7 +22,7 @@ class NumberNode extends AlmostJsonNode
      */
     public static function detect(Input $input, AlmostJsonParser $parser): bool
     {
-        return $input->check(static::DECIMAL, ...static::SIGN, ...static::NUMBERS);
+        return $input->check(static::INFINITY, static::NAN, static::DECIMAL, ...static::SIGN, ...static::NUMBERS);
     }
 
     /**
@@ -32,33 +34,36 @@ class NumberNode extends AlmostJsonNode
     public function read(Input $input, AlmostJsonParser $parser, int $depth = 0): void
     {
         $sign = $this->readSign($input);
-        $input->assert(...static::NUMBERS);
+        $input->assert(static::INFINITY, static::NAN, static::DECIMAL, ...static::NUMBERS);
 
         if ($input->checkInsensitive("0x")) {
-            $input->read(2);
+            $input->skip(2);
             $input->assert(...static::HEX);
             $str = $input->readAll(...static::HEX);
             $value = hexdec($str);
         } else if ($input->checkInsensitive("0b")) {
-            $input->read(2);
+            $input->skip(2);
             $input->assert(...static::BINARY);
             $str = $input->readAll(...static::BINARY);
             $value = bindec($str);
         } else if ($parser->isZeroPrefixOctal() && $input->check("0")) {
-            $input->read(1);
-            $input->assert(...static::OCTAL);
-            $str = $input->readAll(...static::OCTAL);
-            $value = octdec($str);
+            $input->skip();
+            if (!$input->check(...static::OCTAL)) {
+                $value = 0;
+            } else {
+                $str = $input->readAll(...static::OCTAL);
+                $value = octdec($str);
+            }
         } else if ($input->checkInsensitive("0o")) {
-            $input->read(2);
+            $input->skip(2);
             $input->assert(...static::OCTAL);
             $str = $input->readAll(...static::OCTAL);
             $value = octdec($str);
         } else if ($input->checkInsensitive("Infinity")) {
-            $input->read(8);
+            $input->skip(8);
             $value = INF;
         } else if ($input->checkInsensitive("NaN")) {
-            $input->read(3);
+            $input->skip(3);
             $value = NAN;
         } else {
             $float = false;
@@ -105,9 +110,9 @@ class NumberNode extends AlmostJsonNode
     }
 
     /**
-     * @return int
+     * @return int|float
      */
-    public function getValue(): int
+    public function getValue(): int|float
     {
         return $this->value;
     }

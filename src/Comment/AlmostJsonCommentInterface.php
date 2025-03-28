@@ -16,5 +16,5 @@ interface AlmostJsonCommentInterface
      * @param Input $input
      * @return void
      */
-    public static function read(Input $input): void;
+    public static function skip(Input $input): void;
 }

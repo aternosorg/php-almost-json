@@ -32,7 +32,7 @@ class ArrayNode extends AlmostJsonNode
     public function read(Input $input, AlmostJsonParser $parser, int $depth = 0): void
     {
         $input->assert(static::OPEN);
-        $input->read();
+        $input->skip();
         $input->skipWhitespace();
 
         $depth++;
@@ -47,11 +47,11 @@ class ArrayNode extends AlmostJsonNode
             if (!$input->check(static::COMMA)) {
                 break;
             }
-            $input->read();
+            $input->skip();
         }
         $input->skipWhitespace();
         $input->assert(static::CLOSE);
-        $input->read();
+        $input->skip();
         $this->children = $children;
     }
 

@@ -31,16 +31,16 @@ class BooleanNode extends AlmostJsonNode
         $input->assertInsensitive(static::TRUE, static::FALSE);
         $this->value = $input->checkInsensitive(static::TRUE);
         if ($this->value) {
-            $input->read(4);
+            $input->skip(4);
         } else {
-            $input->read(5);
+            $input->skip(5);
         }
     }
 
     /**
      * @return bool
      */
-    public function isValue(): bool
+    public function getValue(): bool
     {
         return $this->value;
     }

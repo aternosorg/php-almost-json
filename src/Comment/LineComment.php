@@ -17,10 +17,10 @@ class LineComment implements AlmostJsonCommentInterface
     /**
      * @inheritDoc
      */
-    public static function read(Input $input): void
+    public static function skip(Input $input): void
     {
         while ($input->valid() && !$input->check("\n")) {
-            $input->read();
+            $input->skip();
         }
     }
 }

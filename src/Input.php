@@ -48,6 +48,21 @@ class Input
     }
 
     /**
+     * @param int $length
+     * @return $this
+     */
+    public function skip(int $length = 1): static
+    {
+        for ($i = 0; $i < $length; $i++) {
+            if (!$this->valid()) {
+                break;
+            }
+            $this->offset++;
+        }
+        return $this;
+    }
+
+    /**
      * @param string ...$expected
      * @return string
      */
@@ -65,6 +80,25 @@ class Input
             }
         } while ($found);
         return $result;
+    }
+
+    /**
+     * @param string ...$expected
+     * @return $this
+     */
+    public function skipAll(string ...$expected): static
+    {
+        do {
+            $found = false;
+            foreach ($expected as $value) {
+                if ($this->check($value)) {
+                    $this->skip(mb_strlen($value));
+                    $found = true;
+                    break;
+                }
+            }
+        } while ($found);
+        return $this;
     }
 
     /**
@@ -174,17 +208,17 @@ class Input
     {
         do {
             if ($this->check(...static::WHITESPACE)) {
-                $this->read();
+                $this->skip();
                 continue;
             }
 
             if (LineComment::detect($this)) {
-                LineComment::read($this);
+                LineComment::skip($this);
                 continue;
             }
 
             if (BlockComment::detect($this)) {
-                BlockComment::read($this);
+                BlockComment::skip($this);
                 continue;
             }
 
