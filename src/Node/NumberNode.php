@@ -71,8 +71,11 @@ class NumberNode extends AlmostJsonNode
             $str = $input->readAll(...static::NUMBERS);
             if ($input->check(static::DECIMAL)) {
                 $str .= $input->read();
-                $input->assert(static::DECIMAL, ...static::NUMBERS);
-                $str .= $input->readAll(...static::NUMBERS);
+                if ($input->check(...static::NUMBERS)) {
+                    $str .= $input->readAll(...static::NUMBERS);
+                } else {
+                    $str .= "0";
+                }
                 $float = true;
             }
             if ($input->check(...static::EXPONENT)) {

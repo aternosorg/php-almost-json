@@ -176,6 +176,15 @@ class NumberNodeTest extends NodeTestCase
         $this->assertEquals(1230, $node->toNative());
     }
 
+    public function testTrailingPoint(): void
+    {
+        $input = new Input("123.");
+        $node = new NumberNode();
+        $node->read($input, $this->parser);
+
+        $this->assertEquals(123.0, $node->getValue());
+    }
+
     public function testDetect(): void
     {
         $input = new Input("123");
