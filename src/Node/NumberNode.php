@@ -1,9 +1,9 @@
 <?php
 
-namespace Aternos\PhpAlmostJson\Node;
+namespace Aternos\AlmostJson\Node;
 
-use Aternos\PhpAlmostJson\Input;
-use Aternos\PhpAlmostJson\AlmostJsonParser;
+use Aternos\AlmostJson\Input;
+use Aternos\AlmostJson\AlmostJsonParser;
 
 class NumberNode extends AlmostJsonNode
 {

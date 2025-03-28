@@ -2,9 +2,9 @@
 
 namespace Tests;
 
-use Aternos\PhpAlmostJson\AlmostJsonParser;
-use Aternos\PhpAlmostJson\Exception\MaxDepthException;
-use Aternos\PhpAlmostJson\Input;
+use Aternos\AlmostJson\AlmostJsonParser;
+use Aternos\AlmostJson\Exception\MaxDepthException;
+use Aternos\AlmostJson\Input;
 
 class AlmostJsonParserTest extends AlmostJsonTestCase
 {

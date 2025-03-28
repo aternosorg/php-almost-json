@@ -1,11 +1,11 @@
 <?php
 
-namespace Aternos\PhpAlmostJson\Node;
+namespace Aternos\AlmostJson\Node;
 
-use Aternos\PhpAlmostJson\Exception\UnexpectedEndOfInputException;
-use Aternos\PhpAlmostJson\Exception\UnexpectedInputException;
-use Aternos\PhpAlmostJson\Input;
-use Aternos\PhpAlmostJson\AlmostJsonParser;
+use Aternos\AlmostJson\Exception\UnexpectedEndOfInputException;
+use Aternos\AlmostJson\Exception\UnexpectedInputException;
+use Aternos\AlmostJson\Input;
+use Aternos\AlmostJson\AlmostJsonParser;
 
 class StringNode extends AlmostJsonNode
 {

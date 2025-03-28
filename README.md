@@ -57,7 +57,7 @@ composer require aternos/almost-json
 ### Parsing
 
 ```php
-$parser = new \Aternos\PhpAlmostJson\AlmostJsonParser();
+$parser = new \Aternos\AlmostJson\AlmostJsonParser();
 $parsed = $parser->parseString('{key: "value"}', assoc: true);
 
 // => ['key' => 'value']
@@ -67,9 +67,9 @@ By default, the parser will assume the string is encoded as UTF-8. To use a diff
 you can call the `parse` method, which accepts an `Input` object instead of a string.
 
 ```php
-$parser = new \Aternos\PhpAlmostJson\AlmostJsonParser();
+$parser = new \Aternos\AlmostJson\AlmostJsonParser();
 
-$input = new \Aternos\PhpAlmostJson\Input('{key: "value"}', encoding: "ISO-8859-1");
+$input = new \Aternos\AlmostJson\Input('{key: "value"}', encoding: "ISO-8859-1");
 $parsed = $parser->parse($input, assoc: true);
 ```
 
@@ -81,7 +81,7 @@ There are a number of options that can be set for a parser instance.
 
 ```php
 
-$parser = new \Aternos\PhpAlmostJson\AlmostJsonParser();
+$parser = new \Aternos\AlmostJson\AlmostJsonParser();
 $parser->setMaxDepth(512) // Maximum depth of the JSON tree
     ->setZeroPrefixOctal(true) // Parse numbers with leading zero as octal
     ->setTopLevelUnquotedStringAllowed(true); // Allow the root of the JSON tree to be an unquoted string
@@ -99,7 +99,7 @@ to first try to use the built-in JSON parser, and only fall back to this library
 try {
     $parsed = json_decode($string, true, flags: JSON_THROW_ON_ERROR);
 } catch (\JsonException $e) {
-    $parser = new \Aternos\PhpAlmostJson\AlmostJsonParser();
+    $parser = new \Aternos\AlmostJson\AlmostJsonParser();
     $parsed = $parser->parseString($string, assoc: true);
 }
 

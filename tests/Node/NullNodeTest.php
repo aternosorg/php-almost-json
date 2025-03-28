@@ -2,9 +2,9 @@
 
 namespace Tests\Node;
 
-use Aternos\PhpAlmostJson\Exception\UnexpectedInputException;
-use Aternos\PhpAlmostJson\Input;
-use Aternos\PhpAlmostJson\Node\NullNode;
+use Aternos\AlmostJson\Exception\UnexpectedInputException;
+use Aternos\AlmostJson\Input;
+use Aternos\AlmostJson\Node\NullNode;
 
 class NullNodeTest extends NodeTestCase
 {

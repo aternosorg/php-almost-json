@@ -1,10 +1,10 @@
 <?php
 
-namespace Aternos\PhpAlmostJson\Node;
+namespace Aternos\AlmostJson\Node;
 
-use Aternos\PhpAlmostJson\Exception\AlmostJsonException;
-use Aternos\PhpAlmostJson\Input;
-use Aternos\PhpAlmostJson\AlmostJsonParser;
+use Aternos\AlmostJson\Exception\AlmostJsonException;
+use Aternos\AlmostJson\Input;
+use Aternos\AlmostJson\AlmostJsonParser;
 use stdClass;
 
 interface AlmostJsonNodeInterface

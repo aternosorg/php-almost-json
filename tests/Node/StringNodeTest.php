@@ -2,10 +2,10 @@
 
 namespace Tests\Node;
 
-use Aternos\PhpAlmostJson\Exception\UnexpectedEndOfInputException;
-use Aternos\PhpAlmostJson\Exception\UnexpectedInputException;
-use Aternos\PhpAlmostJson\Input;
-use Aternos\PhpAlmostJson\Node\StringNode;
+use Aternos\AlmostJson\Exception\UnexpectedEndOfInputException;
+use Aternos\AlmostJson\Exception\UnexpectedInputException;
+use Aternos\AlmostJson\Input;
+use Aternos\AlmostJson\Node\StringNode;
 use PHPUnit\Framework\Attributes\TestWith;
 
 class StringNodeTest extends NodeTestCase

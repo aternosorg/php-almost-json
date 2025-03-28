@@ -2,8 +2,8 @@
 
 namespace Tests\Node;
 
-use Aternos\PhpAlmostJson\Input;
-use Aternos\PhpAlmostJson\Node\BooleanNode;
+use Aternos\AlmostJson\Input;
+use Aternos\AlmostJson\Node\BooleanNode;
 use Tests\Node\NodeTestCase;
 
 class BooleanNodeTest extends NodeTestCase
@@ -42,7 +42,7 @@ class BooleanNodeTest extends NodeTestCase
     {
         $input = new Input("notabool");
         $node = new BooleanNode();
-        $this->expectException(\Aternos\PhpAlmostJson\Exception\UnexpectedInputException::class);
+        $this->expectException(\Aternos\AlmostJson\Exception\UnexpectedInputException::class);
         $node->read($input, $this->parser);
     }
 

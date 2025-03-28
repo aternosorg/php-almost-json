@@ -1,6 +1,6 @@
 <?php
 
-namespace Aternos\PhpAlmostJson\Node;
+namespace Aternos\AlmostJson\Node;
 
 abstract class AlmostJsonNode implements AlmostJsonNodeInterface
 {

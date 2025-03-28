@@ -2,7 +2,7 @@
 
 namespace Tests;
 
-use Aternos\PhpAlmostJson\Exception\AlmostJsonException;
+use Aternos\AlmostJson\Exception\AlmostJsonException;
 
 class ExceptionTest extends AlmostJsonTestCase
 {

@@ -8,7 +8,7 @@
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Aternos\\PhpAlmostJson\\": "src/"
+            "Aternos\\AlmostJson\\": "src/"
         }
     },
     "autoload-dev": {

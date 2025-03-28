@@ -2,10 +2,10 @@
 
 namespace Tests\Node;
 
-use Aternos\PhpAlmostJson\Exception\UnexpectedEndOfInputException;
-use Aternos\PhpAlmostJson\Exception\UnexpectedInputException;
-use Aternos\PhpAlmostJson\Input;
-use Aternos\PhpAlmostJson\Node\ArrayNode;
+use Aternos\AlmostJson\Exception\UnexpectedEndOfInputException;
+use Aternos\AlmostJson\Exception\UnexpectedInputException;
+use Aternos\AlmostJson\Input;
+use Aternos\AlmostJson\Node\ArrayNode;
 
 class ArrayNodeTest extends NodeTestCase
 {

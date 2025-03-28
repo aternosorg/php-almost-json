@@ -2,9 +2,9 @@
 
 namespace Tests;
 
-use Aternos\PhpAlmostJson\Exception\UnexpectedEndOfInputException;
-use Aternos\PhpAlmostJson\Exception\UnexpectedInputException;
-use Aternos\PhpAlmostJson\Input;
+use Aternos\AlmostJson\Exception\UnexpectedEndOfInputException;
+use Aternos\AlmostJson\Exception\UnexpectedInputException;
+use Aternos\AlmostJson\Input;
 use Generator;
 use PHPUnit\Framework\Attributes\DataProvider;
 

@@ -1,8 +1,8 @@
 <?php
 
-namespace Aternos\PhpAlmostJson\Comment;
+namespace Aternos\AlmostJson\Comment;
 
-use Aternos\PhpAlmostJson\Input;
+use Aternos\AlmostJson\Input;
 
 class BlockComment implements AlmostJsonCommentInterface
 {

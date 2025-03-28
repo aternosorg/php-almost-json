@@ -1,6 +1,6 @@
 <?php
 
-namespace Aternos\PhpAlmostJson\Exception;
+namespace Aternos\AlmostJson\Exception;
 
 use Exception;
 use Throwable;

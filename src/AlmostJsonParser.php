@@ -1,18 +1,18 @@
 <?php
 
-namespace Aternos\PhpAlmostJson;
+namespace Aternos\AlmostJson;
 
-use Aternos\PhpAlmostJson\Exception\AlmostJsonException;
-use Aternos\PhpAlmostJson\Exception\MaxDepthException;
-use Aternos\PhpAlmostJson\Exception\UnexpectedEndOfInputException;
-use Aternos\PhpAlmostJson\Exception\UnexpectedInputException;
-use Aternos\PhpAlmostJson\Node\AlmostJsonNode;
-use Aternos\PhpAlmostJson\Node\ArrayNode;
-use Aternos\PhpAlmostJson\Node\BooleanNode;
-use Aternos\PhpAlmostJson\Node\NullNode;
-use Aternos\PhpAlmostJson\Node\NumberNode;
-use Aternos\PhpAlmostJson\Node\ObjectNode;
-use Aternos\PhpAlmostJson\Node\StringNode;
+use Aternos\AlmostJson\Exception\AlmostJsonException;
+use Aternos\AlmostJson\Exception\MaxDepthException;
+use Aternos\AlmostJson\Exception\UnexpectedEndOfInputException;
+use Aternos\AlmostJson\Exception\UnexpectedInputException;
+use Aternos\AlmostJson\Node\AlmostJsonNode;
+use Aternos\AlmostJson\Node\ArrayNode;
+use Aternos\AlmostJson\Node\BooleanNode;
+use Aternos\AlmostJson\Node\NullNode;
+use Aternos\AlmostJson\Node\NumberNode;
+use Aternos\AlmostJson\Node\ObjectNode;
+use Aternos\AlmostJson\Node\StringNode;
 use stdClass;
 
 class AlmostJsonParser

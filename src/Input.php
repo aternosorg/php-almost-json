@@ -1,11 +1,11 @@
 <?php
 
-namespace Aternos\PhpAlmostJson;
+namespace Aternos\AlmostJson;
 
-use Aternos\PhpAlmostJson\Comment\BlockComment;
-use Aternos\PhpAlmostJson\Comment\LineComment;
-use Aternos\PhpAlmostJson\Exception\UnexpectedEndOfInputException;
-use Aternos\PhpAlmostJson\Exception\UnexpectedInputException;
+use Aternos\AlmostJson\Comment\BlockComment;
+use Aternos\AlmostJson\Comment\LineComment;
+use Aternos\AlmostJson\Exception\UnexpectedEndOfInputException;
+use Aternos\AlmostJson\Exception\UnexpectedInputException;
 
 class Input
 {

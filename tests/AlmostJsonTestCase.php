@@ -2,7 +2,7 @@
 
 namespace Tests;
 
-use Aternos\PhpAlmostJson\AlmostJsonParser;
+use Aternos\AlmostJson\AlmostJsonParser;
 use PHPUnit\Framework\TestCase;
 
 class AlmostJsonTestCase extends TestCase

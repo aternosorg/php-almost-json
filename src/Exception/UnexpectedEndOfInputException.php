@@ -1,6 +1,6 @@
 <?php
 
-namespace Aternos\PhpAlmostJson\Exception;
+namespace Aternos\AlmostJson\Exception;
 
 class UnexpectedEndOfInputException extends AlmostJsonException
 {

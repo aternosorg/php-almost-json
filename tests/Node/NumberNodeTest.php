@@ -2,10 +2,10 @@
 
 namespace Tests\Node;
 
-use Aternos\PhpAlmostJson\AlmostJsonParser;
-use Aternos\PhpAlmostJson\Exception\UnexpectedInputException;
-use Aternos\PhpAlmostJson\Input;
-use Aternos\PhpAlmostJson\Node\NumberNode;
+use Aternos\AlmostJson\AlmostJsonParser;
+use Aternos\AlmostJson\Exception\UnexpectedInputException;
+use Aternos\AlmostJson\Input;
+use Aternos\AlmostJson\Node\NumberNode;
 
 class NumberNodeTest extends NodeTestCase
 {
