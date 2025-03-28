@@ -16,6 +16,11 @@ class NumberNodeTest extends NodeTestCase
         $node->read($input, $this->parser);
         $this->assertEquals(123.45, $node->getValue());
         $this->assertEquals(123.45, $node->toNative());
+
+        $input = new Input("123_456");
+        $node = new NumberNode();
+        $node->read($input, $this->parser);
+        $this->assertEquals(123456, $node->getValue());
     }
 
     public function testHex(): void
@@ -25,6 +30,11 @@ class NumberNodeTest extends NodeTestCase
         $node->read($input, $this->parser);
         $this->assertEquals(26, $node->getValue());
         $this->assertEquals(26, $node->toNative());
+
+        $input = new Input("0x1_a");
+        $node = new NumberNode();
+        $node->read($input, $this->parser);
+        $this->assertEquals(26, $node->getValue());
 
         $this->expectException(UnexpectedInputException::class);
         $input = new Input("0xG");
@@ -40,6 +50,11 @@ class NumberNodeTest extends NodeTestCase
         $this->assertEquals(13, $node->getValue());
         $this->assertEquals(13, $node->toNative());
 
+        $input = new Input("0b11_01");
+        $node = new NumberNode();
+        $node->read($input, $this->parser);
+        $this->assertEquals(13, $node->getValue());
+
         $this->expectException(UnexpectedInputException::class);
         $input = new Input("0b2");
         $node = new NumberNode();
@@ -53,6 +68,11 @@ class NumberNodeTest extends NodeTestCase
         $node->read($input, $this->parser);
         $this->assertEquals(493, $node->getValue());
         $this->assertEquals(493, $node->toNative());
+
+        $input = new Input("0o7_55");
+        $node = new NumberNode();
+        $node->read($input, $this->parser);
+        $this->assertEquals(493, $node->getValue());
 
         $this->expectException(UnexpectedInputException::class);
         $input = new Input("0o8");
@@ -68,6 +88,11 @@ class NumberNodeTest extends NodeTestCase
         $node->read($input, $parser);
         $this->assertEquals(493, $node->getValue());
         $this->assertEquals(493, $node->toNative());
+
+        $input = new Input("07_55");
+        $node = new NumberNode();
+        $node->read($input, $parser);
+        $this->assertEquals(493, $node->getValue());
     }
 
     public function testParseZeroInOctalZeroPrefixMode(): void

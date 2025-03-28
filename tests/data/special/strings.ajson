@@ -12,8 +12,8 @@
   'single-quote escape \'',
   "multi-line-
 string",
-  "multi-line-\
-string",
+  "continue-\
+line",
 ]
 
 /*
@@ -31,7 +31,7 @@ string",
   "quote escape \"",
   "single-quote escape '",
   "multi-line-\nstring",
-  "multi-line-\nstring"
+  "continue-line"
 ]
 -----EXPECTED-----
 */
