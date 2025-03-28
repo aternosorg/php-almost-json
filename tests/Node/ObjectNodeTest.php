@@ -71,12 +71,12 @@ class ObjectNodeTest extends NodeTestCase
         $node->read($input, $this->parser);
     }
 
-    public function testMissingClose(): void
+    public function testImplicitClose(): void
     {
         $input = new Input('{"key": "value"');
         $node = new ObjectNode();
-        $this->expectException(UnexpectedEndOfInputException::class);
         $node->read($input, $this->parser);
+        $this->assertEquals(["key" => "value"], $node->toNative(true));
     }
 
     public function testDetect(): void

@@ -43,12 +43,12 @@ class ArrayNodeTest extends NodeTestCase
         $this->assertCount(3, $node->getChildren());
     }
 
-    public function testMissingClose(): void
+    public function testImplicitClose(): void
     {
         $input = new Input("[1, 2, 3");
         $node = new ArrayNode();
-        $this->expectException(UnexpectedEndOfInputException::class);
         $node->read($input, $this->parser);
+        $this->assertEquals([1, 2, 3], $node->toNative(true));
     }
 
     public function testDetect(): void

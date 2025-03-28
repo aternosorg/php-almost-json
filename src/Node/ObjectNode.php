@@ -41,7 +41,7 @@ class ObjectNode extends AlmostJsonNode
         $children = [];
         while (true) {
             $input->skipWhitespace(static::COMMA);
-            if ($input->check(static::CLOSE)) {
+            if (!$input->valid() || $input->check(static::CLOSE)) {
                 break;
             }
 
@@ -58,8 +58,10 @@ class ObjectNode extends AlmostJsonNode
             $input->skipWhitespace(static::COMMA);
         }
         $input->skipWhitespace();
-        $input->assert(static::CLOSE);
-        $input->skip();
+        if ($input->valid()) {
+            $input->assert(static::CLOSE);
+            $input->skip();
+        }
         $this->children = $children;
     }
 

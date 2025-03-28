@@ -21,8 +21,13 @@ When parsing valid JSON, this library should return the exact same result as PHP
 
 - Line comments (`//` and `#`)
 - Block comments (`/* ... */`)
-- Trailing commas
-- Unquoted keys
+- Objects
+  - Unquoted keys
+  - Missing or additional commas
+  - Implicit close at end of input
+- Arrays
+  - Missing or additional commas
+  - Implicit close at end of input
 - Strings
   - Single quotes (`'`) instead of double quotes (`"`)
   - Backticks (`` ` ``) instead of double quotes (`"`)
