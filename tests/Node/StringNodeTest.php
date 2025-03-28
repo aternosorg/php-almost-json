@@ -202,8 +202,23 @@ class StringNodeTest extends NodeTestCase
     {
         $this->parser->setTopLevelUnquotedStringAllowed(false);
         $input = new Input("Hello, World!");
-        $node = new StringNode();
         $this->expectException(UnexpectedInputException::class);
-        $node->read($input, $this->parser);
+        $this->parser->parseNext($input);
+    }
+
+    public function testFallbackToStringIfNumberIsInvalid(): void
+    {
+        $input = new Input('0x');
+        $result = $this->parser->parseNext($input);
+        $this->assertInstanceOf(StringNode::class, $result);
+        $this->assertEquals("0x", $result->getValue());
+    }
+
+    public function testFallbackToStringIfAdditionalDataExistsAfterNumber(): void
+    {
+        $input = new Input('1.1.1');
+        $result = $this->parser->parseNext($input);
+        $this->assertInstanceOf(StringNode::class, $result);
+        $this->assertEquals("1.1.1", $result->getValue());
     }
 }

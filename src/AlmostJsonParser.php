@@ -25,7 +25,6 @@ class AlmostJsonParser
         BooleanNode::class,
         ArrayNode::class,
         ObjectNode::class,
-        NumberNode::class,
         StringNode::class
     ];
 
@@ -103,12 +102,54 @@ class AlmostJsonParser
             if ($nodeClass::detect($input, $this)) {
                 $node = new $nodeClass();
                 $node->read($input, $this, $depth);
+
+                if ($node instanceof StringNode && $node->isUnquoted()) {
+                    $number = $this->handlePotentialNumber($node, $input);
+                    if ($number !== null) {
+                        return $number;
+                    }
+                    if ($depth === 0 && !$this->isTopLevelUnquotedStringAllowed()) {
+                        throw new UnexpectedInputException("Unquoted string not allowed as JSON root" .
+                            ", got " . $node->getValue(), $input->tell() - mb_strlen($node->getValue()));
+                    }
+                }
+
                 return $node;
             }
         }
 
         throw new UnexpectedInputException("Expected JSON node" .
             ", got " . $input->peek(16), $input->tell());
+    }
+
+    /**
+     * This is a hack
+     * Since numbers and unquoted strings can overlap, we always parse a string first and then check
+     * if it is a valid number.
+     *
+     * @param StringNode $string
+     * @param Input $input
+     * @return NumberNode|null
+     */
+    protected function handlePotentialNumber(StringNode $string, Input $input): ?NumberNode
+    {
+        $input = new Input($string->getValue(), $input->getEncoding());
+        if (!NumberNode::detect($input, $this)) {
+            return null;
+        }
+
+        $numberNode = new NumberNode();
+        try {
+            $numberNode->read($input, $this);
+        } catch (AlmostJsonException) {
+            return null;
+        }
+
+        if ($input->valid()) {
+            return null;
+        }
+
+        return $numberNode;
     }
 
     /**

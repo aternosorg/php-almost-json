@@ -27,6 +27,7 @@ class StringNode extends AlmostJsonNode
     ];
 
     protected string $value;
+    protected bool $unquoted = false;
 
     /**
      * @inheritDoc
@@ -46,10 +47,6 @@ class StringNode extends AlmostJsonNode
     public function read(Input $input, AlmostJsonParser $parser, int $depth = 0): void
     {
         if (!$input->check(...static::QUOTE)) {
-            if ($depth === 0 && !$parser->isTopLevelUnquotedStringAllowed()) {
-                throw new UnexpectedInputException("Expected quoted string at top level of JSON document, got " .
-                    $input->peek(16), $input->tell());
-            }
             $this->readUnquoted($input);
             return;
         }
@@ -63,6 +60,7 @@ class StringNode extends AlmostJsonNode
         $input->assert($quote);
         $input->skip();
         $this->value = $result;
+        $this->unquoted = false;
     }
 
     /**
@@ -85,6 +83,7 @@ class StringNode extends AlmostJsonNode
         }
 
         $this->value = $result;
+        $this->unquoted = true;
     }
 
     /**
@@ -141,5 +140,13 @@ class StringNode extends AlmostJsonNode
     public function toNative(bool $assoc = false): string
     {
         return $this->value;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isUnquoted(): bool
+    {
+        return $this->unquoted;
     }
 }
