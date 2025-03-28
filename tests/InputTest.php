@@ -5,9 +5,36 @@ namespace Tests;
 use Aternos\PhpAlmostJson\Exception\UnexpectedEndOfInputException;
 use Aternos\PhpAlmostJson\Exception\UnexpectedInputException;
 use Aternos\PhpAlmostJson\Input;
+use Generator;
+use PHPUnit\Framework\Attributes\DataProvider;
 
 class InputTest extends AlmostJsonTestCase
 {
+    protected const WHITESPACE = [
+        "\t", "\n", "\v",
+        "\f", "\r", " ",
+        "\xA0", "\u{2028}",
+        "\u{2029}", "\u{FEFF}",
+
+        // Zs Unicode category
+        "\u{0020}", "\u{00A0}",
+        "\u{1680}", "\u{2000}",
+        "\u{2001}", "\u{2002}",
+        "\u{2003}", "\u{2004}",
+        "\u{2005}", "\u{2006}",
+        "\u{2007}", "\u{2008}",
+        "\u{2009}", "\u{200A}",
+        "\u{202F}", "\u{205F}",
+        "\u{3000}"
+    ];
+
+    public static function provideWhitespace(): Generator
+    {
+        foreach (self::WHITESPACE as $whitespace) {
+            yield [$whitespace];
+        }
+    }
+
     protected Input $input;
 
     protected function setUp(): void
@@ -130,6 +157,17 @@ class InputTest extends AlmostJsonTestCase
         $input->skip(4);
         $input->skipWhitespace();
         $this->assertEquals(37, $input->tell());
+    }
+
+    #[DataProvider("provideWhitespace")]
+    public function testSkipWhitespaceCharacter(string $char): void
+    {
+        $input = new Input($char . "test" . $char);
+        $input->skipWhitespace();
+        $this->assertEquals(1, $input->tell());
+        $input->skip(4);
+        $input->skipWhitespace();
+        $this->assertEquals(6, $input->tell());
     }
 
     public function testGetEncoding(): void

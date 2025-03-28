@@ -10,7 +10,9 @@
   "quote escape \"",
   'single-quote escape \'',
   "multi-line-
-string"
+string",
+  "multi-line-\
+string",
 ]
 
 /*
@@ -26,6 +28,7 @@ string"
   "ignore unknown escape a",
   "quote escape \"",
   "single-quote escape '",
+  "multi-line-\nstring",
   "multi-line-\nstring"
 ]
 -----EXPECTED-----
