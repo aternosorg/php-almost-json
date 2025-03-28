@@ -177,4 +177,12 @@ class InputTest extends AlmostJsonTestCase
         $input = new Input("Lorem ipsum dolor sit amet, consectetur adipiscing elit.", "ISO-8859-1");
         $this->assertEquals("ISO-8859-1", $input->getEncoding());
     }
+
+    public function testRewind(): void
+    {
+        $this->input->skip(6);
+        $this->assertEquals(6, $this->input->tell());
+        $this->input->rewind();
+        $this->assertEquals(0, $this->input->tell());
+    }
 }

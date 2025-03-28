@@ -221,4 +221,20 @@ class StringNodeTest extends NodeTestCase
         $this->assertInstanceOf(StringNode::class, $result);
         $this->assertEquals("1.1.1", $result->getValue());
     }
+
+    public function testFallbackToStringIfAdditionalDataExistAfterBoolean(): void
+    {
+        $input = new Input('true1');
+        $result = $this->parser->parseNext($input);
+        $this->assertInstanceOf(StringNode::class, $result);
+        $this->assertEquals("true1", $result->getValue());
+    }
+
+    public function testFallbackToStringIfAdditionalDataExistAfterNull(): void
+    {
+        $input = new Input('null1');
+        $result = $this->parser->parseNext($input);
+        $this->assertInstanceOf(StringNode::class, $result);
+        $this->assertEquals("null1", $result->getValue());
+    }
 }

@@ -21,11 +21,18 @@ class AlmostJsonParser
      * @var class-string<AlmostJsonNode>[]
      */
     protected const NODES = [
-        NullNode::class,
-        BooleanNode::class,
         ArrayNode::class,
         ObjectNode::class,
         StringNode::class
+    ];
+
+    /**
+     * @var class-string<AlmostJsonNode>[]
+     */
+    protected const STRING_OVERLAPPING_NODES = [
+        NullNode::class,
+        BooleanNode::class,
+        NumberNode::class,
     ];
 
     protected bool $zeroPrefixOctal = false;
@@ -104,9 +111,9 @@ class AlmostJsonParser
                 $node->read($input, $this, $depth);
 
                 if ($node instanceof StringNode && $node->isUnquoted()) {
-                    $number = $this->handlePotentialNumber($node, $input);
-                    if ($number !== null) {
-                        return $number;
+                    $newNode = $this->handleOverlappingNodes($node, $input);
+                    if ($newNode !== null) {
+                        return $newNode;
                     }
                     if ($depth === 0 && !$this->isTopLevelUnquotedStringAllowed()) {
                         throw new UnexpectedInputException("Unquoted string not allowed as JSON root" .
@@ -124,32 +131,38 @@ class AlmostJsonParser
 
     /**
      * This is a hack
-     * Since numbers and unquoted strings can overlap, we always parse a string first and then check
-     * if it is a valid number.
+     * Since numbers, booleans, and null can overlap unquoted strings, we always parse a string first and then check
+     * if it is a valid other node.
      *
      * @param StringNode $string
      * @param Input $input
-     * @return NumberNode|null
+     * @return AlmostJsonNode|null
      */
-    protected function handlePotentialNumber(StringNode $string, Input $input): ?NumberNode
+    protected function handleOverlappingNodes(StringNode $string, Input $input): ?AlmostJsonNode
     {
         $input = new Input($string->getValue(), $input->getEncoding());
-        if (!NumberNode::detect($input, $this)) {
-            return null;
+
+        foreach (static::STRING_OVERLAPPING_NODES as $nodeClass) {
+            $input->rewind();
+            if (!$nodeClass::detect($input, $this)) {
+                continue;
+            }
+
+            $node = new $nodeClass();
+            try {
+                $node->read($input, $this);
+            } catch (AlmostJsonException) {
+                continue;
+            }
+
+            if ($input->valid()) {
+                continue;
+            }
+
+            return $node;
         }
 
-        $numberNode = new NumberNode();
-        try {
-            $numberNode->read($input, $this);
-        } catch (AlmostJsonException) {
-            return null;
-        }
-
-        if ($input->valid()) {
-            return null;
-        }
-
-        return $numberNode;
+        return null;
     }
 
     /**

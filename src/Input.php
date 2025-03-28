@@ -250,4 +250,13 @@ class Input
     {
         return $this->encoding;
     }
+
+    /**
+     * @return $this
+     */
+    public function rewind(): static
+    {
+        $this->offset = 0;
+        return $this;
+    }
 }
