@@ -1,13 +1,17 @@
 {
   "normal": [1, 2, 3],
   "trailing-comma": [1, 2, 3,],
+  "no-comma": [1 2 3],
+  "multiple-comma": [,1, 2,, 3,],
 }
 
 /*
 -----EXPECTED-----
 {
   "normal": [1, 2, 3],
-  "trailing-comma": [1, 2, 3]
+  "trailing-comma": [1, 2, 3],
+  "no-comma": [1, 2, 3],
+  "multiple-comma": [1, 2, 3]
 }
 -----EXPECTED-----
 */

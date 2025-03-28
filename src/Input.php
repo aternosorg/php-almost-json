@@ -218,9 +218,10 @@ class Input
     }
 
     /**
+     * @param string ...$also
      * @return $this
      */
-    public function skipWhitespace(): static
+    public function skipWhitespace(string ...$also): static
     {
         do {
             if ($this->check(...static::WHITESPACE)) {
@@ -236,6 +237,13 @@ class Input
             if (BlockComment::detect($this)) {
                 BlockComment::skip($this);
                 continue;
+            }
+
+            foreach ($also as $value) {
+                if ($this->check($value)) {
+                    $this->skip(mb_strlen($value));
+                    continue 2;
+                }
             }
 
             break;

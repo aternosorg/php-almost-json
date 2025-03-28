@@ -42,7 +42,6 @@ When parsing valid JSON, this library should return the exact same result as PHP
   - Decimal numbers with a trailing dot (e.g. `1.`)
   - Decimal numbers with a leading dot (e.g. `.1`)
   - Float values `NaN`, `Infinity`, and `-Infinity`
-  - Underscores in values (e.g. `1_000_000.0`)
 - Case-insensitive boolean values
 - Case-insensitive null
 - Ignore additional data after end of root node

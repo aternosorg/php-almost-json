@@ -40,7 +40,7 @@ class ObjectNode extends AlmostJsonNode
         $depth++;
         $children = [];
         while (true) {
-            $input->skipWhitespace();
+            $input->skipWhitespace(static::COMMA);
             if ($input->check(static::CLOSE)) {
                 break;
             }
@@ -55,11 +55,7 @@ class ObjectNode extends AlmostJsonNode
 
             $value = $parser->parseNext($input, $depth);
             $children[$key->getValue()] = $value;
-            $input->skipWhitespace();
-            if (!$input->check(static::COMMA)) {
-                break;
-            }
-            $input->skip();
+            $input->skipWhitespace(static::COMMA);
         }
         $input->skipWhitespace();
         $input->assert(static::CLOSE);

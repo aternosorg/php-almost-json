@@ -1,13 +1,17 @@
 {
   "normal": {a: 1, b: 2, c: 3},
   "trailing-comma": {a: 1, b: 2, c: 3,},
+  "no-comma": {a: 1 b: 2 c: 3},
+  "multiple-comma": {,a: 1,, b: 2, c: 3},
 }
 
 /*
 -----EXPECTED-----
 {
   "normal": {"a": 1, "b": 2, "c": 3},
-  "trailing-comma": {"a": 1, "b": 2, "c": 3}
+  "trailing-comma": {"a": 1, "b": 2, "c": 3},
+  "no-comma": {"a": 1, "b": 2, "c": 3},
+  "multiple-comma": {"a": 1, "b": 2, "c": 3}
 }
 -----EXPECTED-----
 */

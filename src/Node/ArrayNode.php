@@ -38,16 +38,12 @@ class ArrayNode extends AlmostJsonNode
         $depth++;
         $children = [];
         while (true) {
-            $input->skipWhitespace();
+            $input->skipWhitespace(static::COMMA);
             if ($input->check(static::CLOSE)) {
                 break;
             }
             $children[] = $parser->parseNext($input, $depth);
-            $input->skipWhitespace();
-            if (!$input->check(static::COMMA)) {
-                break;
-            }
-            $input->skip();
+            $input->skipWhitespace(static::COMMA);
         }
         $input->skipWhitespace();
         $input->assert(static::CLOSE);
