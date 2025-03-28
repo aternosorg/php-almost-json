@@ -45,6 +45,7 @@ When parsing valid JSON, this library should return the exact same result as PHP
   - Underscores in values (e.g. `1_000_000.0`)
 - Case-insensitive boolean values
 - Case-insensitive null
+- Ignore additional data after end of root node
 
 ## Usage
 
