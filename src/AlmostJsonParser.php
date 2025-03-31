@@ -108,10 +108,12 @@ class AlmostJsonParser
         foreach (static::NODES as $nodeClass) {
             if ($nodeClass::detect($input, $this)) {
                 $node = new $nodeClass();
+                $startPos = $input->tell();
                 $node->read($input, $this, $depth);
+                $endPos = $input->tell();
 
                 if ($node instanceof StringNode && $node->isUnquoted()) {
-                    $newNode = $this->handleOverlappingNodes($node, $input);
+                    $newNode = $this->handleOverlappingNodes($input, $startPos, $endPos);
                     if ($newNode !== null) {
                         return $newNode;
                     }
@@ -134,16 +136,15 @@ class AlmostJsonParser
      * Since numbers, booleans, and null can overlap unquoted strings, we always parse a string first and then check
      * if it is a valid other node.
      *
-     * @param StringNode $string
      * @param Input $input
+     * @param int $startPos
+     * @param int $endPos
      * @return AlmostJsonNode|null
      */
-    protected function handleOverlappingNodes(StringNode $string, Input $input): ?AlmostJsonNode
+    protected function handleOverlappingNodes(Input $input, int $startPos, int $endPos): ?AlmostJsonNode
     {
-        $input = new Input($string->getValue(), $input->getEncoding());
-
         foreach (static::STRING_OVERLAPPING_NODES as $nodeClass) {
-            $input->rewind();
+            $input->seek($startPos);
             if (!$nodeClass::detect($input, $this)) {
                 continue;
             }
@@ -155,13 +156,14 @@ class AlmostJsonParser
                 continue;
             }
 
-            if ($input->valid()) {
+            if ($input->tell() !== $endPos) {
                 continue;
             }
 
             return $node;
         }
 
+        $input->seek($endPos);
         return null;
     }
 

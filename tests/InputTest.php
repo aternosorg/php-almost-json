@@ -185,4 +185,14 @@ class InputTest extends AlmostJsonTestCase
         $this->input->rewind();
         $this->assertEquals(0, $this->input->tell());
     }
+
+    public function testSeek(): void
+    {
+        $this->input->skip(6);
+        $this->assertEquals(6, $this->input->tell());
+        $this->input->seek(0);
+        $this->assertEquals(0, $this->input->tell());
+        $this->input->seek(6);
+        $this->assertEquals(6, $this->input->tell());
+    }
 }

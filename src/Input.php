@@ -267,4 +267,14 @@ class Input
         $this->offset = 0;
         return $this;
     }
+
+    /**
+     * @param int $offset
+     * @return $this
+     */
+    public function seek(int $offset): static
+    {
+        $this->offset = $offset;
+        return $this;
+    }
 }
