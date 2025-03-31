@@ -237,4 +237,13 @@ class StringNodeTest extends NodeTestCase
         $this->assertInstanceOf(StringNode::class, $result);
         $this->assertEquals("null1", $result->getValue());
     }
+
+    public function testUnqotedStringFollowedByComment(): void
+    {
+        $input = new Input("Hello-World/*comment*/");
+        $node = new StringNode();
+        $node->read($input, $this->parser);
+        $this->assertEquals("Hello-World", $node->getValue());
+        $this->assertEquals(11, $input->tell());
+    }
 }

@@ -10,7 +10,7 @@ use Aternos\AlmostJson\AlmostJsonParser;
 class StringNode extends AlmostJsonNode
 {
     protected const QUOTE = ["'", '"', '`'];
-    protected const UNQUOTED_DISALLOWED = ["{", "}", "[", "]", ":", ",", " ", "\t", "\n", "\r"];
+    protected const UNQUOTED_DISALLOWED = ["{", "}", "[", "]", ":", ",", " ", "\t", "\n", "\r", "/", "#"];
     protected const ESCAPE = "\\";
     protected const ESCAPE_UNICODE = "u";
     protected const ESCAPE_ASCII = "x";
