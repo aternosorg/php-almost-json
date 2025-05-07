@@ -13,7 +13,7 @@ class AlmostJsonException extends Exception
      * @param Throwable|null $previous
      */
     public function __construct(
-        string $message = "",
+        string $message,
         protected int $offset,
         ?Throwable $previous = null
     )
